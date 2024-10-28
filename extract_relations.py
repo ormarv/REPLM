@@ -64,10 +64,10 @@ if __name__ == "__main__":
     parser.add_argument('-tmp', '--temperature', type=float, default=0.0001, help='The temperature of the model sampling')
 
     parser.add_argument('--path_data', type=str, default="DocRED/data/relation_docs_dev", help='Path to the DOCRED relation documents of evaluation set')
-    parser.add_argument('--path_embeddings', type=str, default="DocRED/data/embeddings_dev.pkl", help='Path to the DOCRED document embeddings of evaluation set')
+    parser.add_argument('--path_embeddings', type=str, default="DocRED/data/embeddings_dev.json", help='Path to the DOCRED document embeddings of evaluation set')
 
     parser.add_argument('--path_context', type=str, default="DocRED/data/relation_docs_distant", help='Path to the DOCRED relation documents to be used for in-context examples')
-    parser.add_argument('--path_context_embeddings', type=str, default="DocRED/data/embeddings_train_distant.pkl", help='Path to the DOCRED in-context document embeddings')
+    parser.add_argument('--path_context_embeddings', type=str, default="DocRED/data/embeddings_train_distant.json", help='Path to the DOCRED in-context document embeddings')
 
     #Subset the documents that are extremely long. (to enable fitting into the memory)
     parser.add_argument('--doc_max_chars', type=int, default=1000, help='Remove paragraphs longer than doc_max_chars chars (for context)')

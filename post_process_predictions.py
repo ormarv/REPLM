@@ -14,6 +14,7 @@ import argparse
 import os
 from os.path import dirname,basename
 from collections import namedtuple
+import logging
 
  
 
