@@ -4,7 +4,7 @@ import os
 import numpy as np
 import json
 from tqdm import tqdm
-import argparse
+from argparse import ArgumentParser
 
 def main(args):
     rel_info = "../DocRED/data/rel_info.json"
@@ -30,7 +30,7 @@ def main(args):
 
     
     for i in tqdm(range(len(data))):
-        sents_text = list(map(lambda words: " ".join(map(str, words), data[i]["sents"]))
+        sents_text = list(map(lambda words: " ".join(map(str, words)), data[i]["sents"]))
         data[i]["sents_text"] = sents_text
         
         paragraph = " ".join(map(str, sents_text))
@@ -43,7 +43,7 @@ def main(args):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
+    parser = ArgumentParser()
 
     parser.add_argument('--doc_split', type=str, default="train_annotated", help='supported splits {train_distant, train_annotated, dev}')
 

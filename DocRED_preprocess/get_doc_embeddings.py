@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 import json
 import pickle
-import argparse
+from argparse import ArgumentParser
 
 def main(args):
 
@@ -14,7 +14,7 @@ def main(args):
 	with open(args.path_doc, "rb") as f:
 		data = json.load(f)
 
-	list_pars = [doc["paragraph"] for doc in data]
+	list_pars = [doc["sents"] for doc in data]  # replaced paragraph with sents
 	list_par_ids = [i for i in range(len(data))]
 	list_par_titles = [doc["title"] for doc in data]
 
@@ -29,9 +29,9 @@ def main(args):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
+    parser = ArgumentParser()
 
-    parser.add_argument('-p', '--path_doc', type=str, default="train_annotated_preprocessed.json", help='full path to the doc files kept in paragraph format')
+    parser.add_argument('-p', '--path_doc', type=str, default="train_annotated.json", help='full path to the doc files kept in paragraph format')
     parser.add_argument('-w', '--write_file', type=str, default="embeddings_train_annotated.pkl", help='Name of the postprocess log file')
     
 

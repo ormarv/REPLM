@@ -5,8 +5,9 @@ import json
 import os
 import pandas as pd
 from tqdm import tqdm
+from argparse import ArgumentParser
 
-def process_label(raw_dataset, doc_id, label_id, rels):
+def process_label(raw_dataset, doc_id, label_id, rels,dict_rel_tables):
     #process the corresponding label and get the dataframe out of it.
     paragraph = raw_dataset[doc_id]["paragraph"]
     
@@ -39,7 +40,7 @@ def main(args):
         data_path = "../DocRED/data/train_annotated_preprocessed.json"
         save_dir = "../DocRED/data/relation_docs"
     elif args.doc_split == "dev":
-        data_path = "../DocRED/data/dev_preprocessedjson"
+        data_path = "../DocRED/data/dev_preprocessed.json"
         save_dir = "../DocRED/data/relation_docs_dev"
     else:
         print("Given doc split is not supported!")
@@ -61,7 +62,7 @@ def main(args):
     for i, doc in enumerate(tqdm(data)):
         labels = doc["labels"]
         for j in range(len(labels)):
-            process_label(data, i, j, rels)
+            process_label(data, i, j, rels,dict_rel_tables)
 
     for rel in rels.keys():
         dict_rel_tables[rel] = pd.DataFrame.from_dict(dict_rel_tables[rel], orient='index', 
@@ -77,7 +78,7 @@ def main(args):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
+    parser = ArgumentParser()
 
     parser.add_argument('--doc_split', type=str, default="train_annotated", help='supported splits {train_distant, train_annotated, dev}')
 
