@@ -103,10 +103,9 @@ class PromptDataset:
     def prepare_raw_data(self, path_data, path_embeddings):
         read_path = os.path.join(path_data, self.args.relation + ".csv")
         raw_data = pd.read_csv(read_path)
-
         raw_data.subject_names = raw_data.subject_names.apply(ast.literal_eval)
         raw_data.object_names = raw_data.object_names.apply(ast.literal_eval)
-        raw_data.evidences = raw_data.evidences.apply(ast.literal_eval)
+        #raw_data.evidences = raw_data.evidences.apply(ast.literal_eval)
 
         #calculate the num chars in each paragraph
         raw_data['len_paragraph'] = raw_data.apply(lambda x: len(x.paragraph), axis=1)
@@ -117,8 +116,7 @@ class PromptDataset:
                  "len_paragraph": lambda x: list(x)[0],
                  "predicate_name":lambda x: list(x)[0],
                  "subject_names":lambda x: list(x),
-                 "object_names":lambda x: list(x),
-                 "evidences":lambda x: list(x)}
+                 "object_names":lambda x: list(x)} 
 
             raw_data = raw_data.groupby("paragraph_id").agg(agg_dict)
             #raw_data = raw_data.reset_index()
